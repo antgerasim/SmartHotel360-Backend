@@ -1,3 +1,56 @@
+#UPDATE 2020
+## in order to run this locally:
+1. Start the data stores
+
+PostgreSQL and SQL Server databases are stored in Docker containers. These containers should be started first so the databases are on-line when the application logic containers start up. 
+
+Go to DIR:
+{your-drive}\SmartHotel360-Backend\Source\Backend\src>
+
+Start the data stores first by typing:
+
+docker-compose up sql-data reviews-data tasks-data
+
+Wait for those containers to be initialized; you'll know they're ready once the console output stops appearing for longer than a minute. The screen shot below demonstrates the data store containiners' setup being complete and with them in a ready state.
+
+Data containers up
+
+2. Start the microservices
+
+Once the data stores are running, the microservices can be started. BUT BEFORE, UPDATE THE 2 pom.xml (tasks, reviews) FILES LOCATED @ 
+{your-drive}\SmartHotel360-Backend\Source\Backend\src\SmartHotel.Services.Tasks
+{your-drive}\SmartHotel360-Backend\Source\Backend\src\SmartHotel.Services.Reviews
+
+FROM 
+	<repositories>
+       <repository>
+          <id>central</id>
+          <name>Central</name>
+          <url>http://repo1.maven.org/maven2</url>
+       </repository>
+    </repositories>
+
+TO
+	<repositories>
+       <repository>
+          <id>central</id>
+          <name>Central</name>
+          <url>https://repo1.maven.org/maven2</url> <!-- HTTPS HERE, CHECK CONNECTION IN BROWSER-->
+       </repository>
+    </repositories>
+TO AVOID THE 'Non-resolvable parent POM' ERROR 
+
+Open a new terminal window and execute a second call to docker-compose, this time with no images specified.
+
+    Note: It is important that you open a new terminal window and leave the first one running. Killing the terminal process with a Ctrl-C will stop all of the data containers.
+
+docker-compose up
+
+This will start all the remaining containers. Once the containers are online the terminal should stop updating for a few seconds. The terminal screen shot below demonstrates what the terminal should look like once all the microservice containers are running.
+
+Microservices up
+
+
 # **This project is retired, archived, and no longer supported. You are welcome to continue to use and fork the repository.**
 
 ## For the latest sample references visit: https://aka.ms/tailwindtraders & https://aka.ms/rpsls 
