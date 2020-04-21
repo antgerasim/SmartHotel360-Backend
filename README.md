@@ -1,8 +1,8 @@
 #UPDATE 2020
 ## in order to run this locally:
-1. Start the data stores
+## 1. Start the data stores
 
-PostgreSQL and SQL Server databases are stored in Docker containers. These containers should be started first so the databases are on-line when the application logic containers start up. 
+PostgreSQL and SQL Server databases are stored in Docker containers. These containers should be started first so the databases are on-line when the application logic containers start up. BUT BEFORE, ENSURE YOUR DOCKER COMPUTING RESOURCES ARE SET UP LARGER THEN 3.5GB IN ORDER TO RUN SQL SERVER!
 
 Go to DIR:
 {your-drive}\SmartHotel360-Backend\Source\Backend\src>
@@ -15,7 +15,7 @@ Wait for those containers to be initialized; you'll know they're ready once the 
 
 Data containers up
 
-2. Start the microservices
+## 2. Start the microservices
 
 Once the data stores are running, the microservices can be started. BUT BEFORE, UPDATE THE 2 pom.xml (tasks, reviews) FILES LOCATED @ 
 {your-drive}\SmartHotel360-Backend\Source\Backend\src\SmartHotel.Services.Tasks
@@ -49,6 +49,31 @@ docker-compose up
 This will start all the remaining containers. Once the containers are online the terminal should stop updating for a few seconds. The terminal screen shot below demonstrates what the terminal should look like once all the microservice containers are running.
 
 Microservices up
+
+## 3. Verify services are running
+
+Once the containers are started using the docker-compose up commands, their running state can be verified by executing this command:
+
+docker ps
+
+The terminal window will show all of the containers running. Take note of the ports that have been set for each of the microservice containers.
+
+Container ports
+
+Each of these ports redirects to port 80 within the container image. Most of these microservices expose an Open API Specification (formerly known as Swagger) endpoint that describes the back-end REST APIs. To verify the APIs are up and running, use any of the ports in this list to browse the API description page for each of the microservices.
+
+    Note: not all of these URLs will result with a Swagger-UI test page, but they all should resolve once the microservices are all running.
+
+Microservice or API 	URL
+Notifications 	http://localhost:6105
+Discounts 	http://localhost:6107
+Configuration 	http://localhost:6103
+Reviews 	http://localhost:6106
+Tasks 	http://localhost:6104
+Bookings 	http://localhost:6100
+Hotels 	http://localhost:6101
+Profiles 	http://localhost:6108
+Suggestions 	http://localhost:6102
 
 
 # **This project is retired, archived, and no longer supported. You are welcome to continue to use and fork the repository.**
